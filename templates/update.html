@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+</head>
+<body>
+    <h1>Update Prediction</h1>
+
+<form method="POST" action="/update/{{ prediction[0] }}">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" value="{{ prediction[1] }}">
+
+  <label for="birthday">Birthday:</label>
+  <input type="date" id="birthday" name="birthday" value="{{ prediction[2] }}" onchange="updateAge()">
+  
+  <label for="age">Age:</label>
+  <input type="text" id="age" name="age" value="{{ prediction[3] }}" readonly>
+
+  <label for="gender">Gender:</label>
+  <select id="gender" name="gender">
+    <option value="Male" {% if prediction[4] == "Male" %}selected{% endif %}>Male</option>
+    <option value="Female" {% if prediction[4] == "Female" %}selected{% endif %}>Female</option>
+  </select>
+  
+
+  <label for="contact">Contact:</label>
+  <input type="text" id="contact" name="contact" value="{{ prediction[5] }}">
+
+  <label for="address">Address:</label>
+  <input type="text" id="address" name="address" value="{{ prediction[6] }}">
+
+  <div class="question-group">
+    <label for="q1">High blood Preassure:</label>
+    <div class="radio-group">
+      <input type="radio" id="q1-yes" name="q1" value="Yes" {% if prediction[8] == "Yes" %}checked{% endif %}>
+      <label for="q1-yes">Yes</label>
+      <input type="radio" id="q1-no" name="q1" value="No" {% if prediction[8] == "No" %}checked{% endif %}>
+      <label for="q1-no">No</label>
+      <input type="radio" id="q1-sometimes" name="q1" value="Sometimes" {% if prediction[8] == "Sometimes" %}checked{% endif %}>
+      <label for="q1-sometimes">Sometimes</label> 
+    </div>
+  </div>
+  
+  <div class="question-group">
+    <label for="q2">Stress:</label>
+    <div class="radio-group">
+      <input type="radio" id="q2-yes" name="q2" value="Yes" {% if prediction[9] == "Yes" %}checked{% endif %}>
+      <label for="q2-yes">Yes</label>
+      <input type="radio" id="q2-no" name="q2" value="No" {% if prediction[9] == "No" %}checked{% endif %}>
+      <label for="q2-no">No</label>
+      <input type="radio" id="q2-sometimes" name="q2" value="Sometimes" {% if prediction[9] == "Sometimes" %}checked{% endif %}>
+      <label for="q2-sometimes">Sometimes</label> 
+    </div>
+  </div>
+  
+  <div class="question-group">
+    <label for="q3">reflex problems:</label>
+    <div class="radio-group">
+      <input type="radio" id="q3-yes" name="q3" value="Yes" {% if prediction[10] == "Yes" %}checked{% endif %}>
+      <label for="q3-yes">Yes</label>
+      <input type="radio" id="q3-no" name="q3" value="No" {% if prediction[10] == "No" %}checked{% endif %}>
+      <label for="q3-no">No</label>
+      <input type="radio" id="q3-sometimes" name="q3" value="Sometimes" {% if prediction[10] == "Sometimes" %}checked{% endif %}>
+      <label for="q3-sometimes">Sometimes</label> 
+    </div>
+  </div>
+
+  <div class="question-group">
+    <label for="q4">speech problems:</label>
+    <div class="radio-group">
+      <input type="radio" id="q4-yes" name="q4" value="Yes" {% if prediction[11] == "Yes" %}checked{% endif %}>
+      <label for="q4-yes">Yes</label>
+      <input type="radio" id="q4-no" name="q4" value="No" {% if prediction[11] == "No" %}checked{% endif %}>
+      <label for="q4-no">No</label>
+      <input type="radio" id="q4-sometimes" name="q4" value="Sometimes" {% if prediction[11] == "Sometimes" %}checked{% endif %}>
+      <label for="q4-sometimes">Sometimes</label> 
+    </div>
+  </div>
+  
+  <div class="question-group">
+    <label for="q5">forgetfulness:</label>
+    <div class="radio-group">
+      <input type="radio" id="q5-yes" name="q5" value="Yes" {% if prediction[12] == "Yes" %}checked{% endif %}>
+      <label for="q5-yes">Yes</label>
+      <input type="radio" id="q5-no" name="q5" value="No" {% if prediction[12] == "No" %}checked{% endif %}>
+      <label for="q5-no">No</label>
+      <input type="radio" id="q5-sometimes" name="q5" value="Sometimes" {% if prediction[12] == "Sometimes" %}checked{% endif %}>
+      <label for="q5-sometimes">Sometimes</label> 
+    </div>
+  </div>
+  
+  <div class="question-group">
+    <label for="q6">vision problems:</label>
+    <div class="radio-group">
+      <input type="radio" id="q6-yes" name="q6" value="Yes" {% if prediction[13] == "Yes" %}checked{% endif %}>
+      <label for="q6-yes">Yes</label>
+      <input type="radio" id="q6-no" name="q6" value="No" {% if prediction[13] == "No" %}checked{% endif %}>
+      <label for="q6-no">No</label>
+      <input type="radio" id="q6-sometimes" name="q6" value="Sometimes" {% if prediction[13] == "Sometimes" %}checked{% endif %}>
+      <label for="q6-sometimes">Sometimes</label> 
+    </div>
+  </div>
+    
+  <div class="question-group">
+    <label for="q7">breathing problems:</label>
+    <div class="radio-group">
+      <input type="radio" id="q7-yes" name="q7" value="Yes" {% if prediction[14] == "Yes" %}checked{% endif %}>
+      <label for="q7-yes">Yes</label>
+      <input type="radio" id="q7-no" name="q7" value="No" {% if prediction[14] == "No" %}checked{% endif %}>
+      <label for="q7-no">No</label>
+      <input type="radio" id="q7-sometimes" name="q7" value="Sometimes" {% if prediction[14] == "Sometimes" %}checked{% endif %}>
+      <label for="q7-sometimes">Sometimes</label> 
+    </div>
+  </div>
+  
+  <div class="question-group">
+    <label for="q8">nausea:</label>
+    <div class="radio-group">
+      <input type="radio" id="q8-yes" name="q8" value="Yes" {% if prediction[15] == "Yes" %}checked{% endif %}>
+      <label for="q8-yes">Yes</label>
+      <input type="radio" id="q2-no" name="q8" value="No" {% if prediction[15] == "No" %}checked{% endif %}>
+      <label for="q8-no">No</label>
+      <input type="radio" id="q8-sometimes" name="q8" value="Sometimes" {% if prediction[15] == "Sometimes" %}checked{% endif %}>
+      <label for="q8-sometimes">Sometimes</label> 
+    </div>
+  </div>
+
+  </div>
+  </div>
+
+  <input type="submit" value="Update">
+
+  <script>
+    function updateAge() {
+      var birthday = new Date(document.getElementById("birthday").value);
+      var today = new Date();
+      var age = today.getFullYear() - birthday.getFullYear();
+      var monthDiff = today.getMonth() - birthday.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+        age--;
+      }
+      document.getElementById("age").value = age;
+    }
+    </script>
+</form>
+
+</body>
+</html>
+
+<style>
+  body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+h1 {
+  text-align: center;
+  color: #333333;
+}
+
+form {
+  margin: 0 auto;
+  width: 50%;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px #999999;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input[type="text"],
+select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="date"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="radio"] {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+input[type="submit"]:active {
+  background-color: #3e8e41;
+}
+
+.radio-group {
+  display: inline-block;
+}
+
+.radio-group input[type="radio"],
+.radio-group label {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.question-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.question-group label {
+  margin-right: 10px;
+}
+
+.radio-group {
+  display: flex;
+}
+
+</style>

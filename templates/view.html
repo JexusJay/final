@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Results Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  
+  <body>
+    <h1>Results</h1>
+    <div id="container">
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>Code</td>
+          <td>{{ code }}</td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td>{{ name }}</td>
+        </tr>
+        <tr>
+          <td>Birthday</td>
+          <td>{{ birthday }}</td>
+        </tr>
+        <tr>
+          <td>Age</td>
+          <td>{{ age }}</td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td>{{ gender }}</td>
+        </tr>
+        <tr>
+          <td>Contact</td>
+          <td>{{ contact }}</td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td>{{ address }}</td>
+        </tr>
+        <tr>
+          <td>High Blood</td>
+          <td>{{ q1 }}</td>
+        </tr>
+        <tr>
+          <td>Stress</td>
+          <td>{{ q2 }}</td>
+        </tr>
+        <tr>
+          <td>reflex problems</td>
+          <td>{{ q3 }}</td>
+        </tr>
+        <tr>
+          <td>speech problems</td>
+          <td>{{ q4 }}</td>
+        </tr>
+        <tr>
+          <td>forgetfulness</td>
+          <td>{{ q5 }}</td>
+        </tr>
+        <tr>
+          <td>vision problems</td>
+          <td>{{ q6 }}</td>
+        </tr>
+        <tr>
+          <td>breathing problems</td>
+          <td>{{ q7 }}</td>
+        </tr>
+        <tr>
+          <td>nausea</td>
+          <td>{{ q8 }}</td>
+        </tr>
+        <tr>
+          <td>Classification</td>
+          <td>{{ predictions }}</td>
+        </tr>
+        <tr>
+          <td>Diagnosis</td>
+          <td>
+            {% if predictions == 'less addictive to alcohol' %}
+              <p>You are not addicted to alcohol but make sure to drink moderately.</p>
+            {% elif predictions == 'mildly addictive to alcohol' %}
+              <p>Nothing to worry much yet, but you should be more careful at this stage. If symptoms persist you may have mild speech, memory, attention, coordination, balance impairments. You need to watch your drinking habit.</p>
+            {% elif predictions == 'high addiction to alcohol' %}
+            <p>You need to have a consultation with a therapist or doctor to prevent life-threatening cases or severe impairment.</p>
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+  
+      <canvas id="chart"></canvas>
+    </div>
+  
+    <a href="/history">Records</a>
+    <a href="/">Home</a>
+  
+    <script>
+      // Get the responses to questions q1 to q8
+      const responses = ['{{ q1 }}', '{{ q2 }}', '{{ q3 }}', '{{ q4 }}', '{{ q5 }}', '{{ q6 }}', '{{ q7 }}', '{{ q8 }}'];
+  
+      // Count the number of Yes, No, and Sometimes responses
+      const counts = {
+        Yes: 0,
+        No: 0,
+        Sometimes: 0,
+      };
+  
+      for (const response of responses) {
+        counts[response]++;
+      }
+  
+      // Create the chart
+      const chartElement = document.getElementById('chart');
+      const chart = new Chart(chartElement, {
+        type: 'pie',
+        data: {
+          labels: Object.keys(counts),
+          datasets: [{
+            data: Object.values(counts),
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          }, ],
+        },
+        options: {
+          responsive: false,
+          maintainAspectRatio: false,
+          width: 400,
+          height: 400,
+        },
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  #container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  #chart {
+    width: 300px;
+    height: 300px;
+    margin-right: 200px;
+    margin-top: 40px;
+  }
+
+  table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 200px;
+    font-size: 14px;
+    width: 50%;
+  }
+
+  th,
+  td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  a {
+    display: inline-block;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+  }
+</style>
+
+

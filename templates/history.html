@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>History Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h1>History</h1>
+    <form action="{{ url_for('search_predictions') }}" method="GET">
+      <div class="form-group">
+        <input type="text" name="search_query" class="form-control search-bar" placeholder="Search by name or code">
+        <button type="submit" class="btn btn-primary btn-search">Search</button>
+      </div>
+    </form>
+    
+<a href="/">Home</a>
+<br><br>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Birthday</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Contact</th>
+      <th>Address</th>
+      <th>Code</th>
+      <th>Classification</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for prediction in predictions %}
+    <tr>
+      <td class="invisible">{{ prediction[0] }}</td>
+      <td>{{ prediction[1] }}</td>
+      <td>{{ prediction[2] }}</td>
+      <td>{{ prediction[3] }}</td>
+      <td>{{ prediction[4] }}</td>
+      <td>{{ prediction[5] }}</td>
+      <td>{{ prediction[6] }}</td>
+      <td>{{ prediction[7] }}</td>
+      <td class="invisible">{{ prediction[8] }}</td>
+      <td class="invisible">{{ prediction[9] }}</td>
+      <td class="invisible">{{ prediction[10] }}</td>
+      <td class="invisible">{{ prediction[11] }}</td>
+      <td class="invisible">{{ prediction[12] }}</td>
+      <td class="invisible">{{ prediction[13] }}</td>
+      <td class="invisible">{{ prediction[14] }}</td>
+      <td class="invisible">{{ prediction[15] }}</td>
+
+      <td>{{ prediction[16] }}</td>
+      <td>
+        <a href="{{ url_for('delete_prediction', id=prediction[0]) }}" class="btn btn-delete">Delete</a>
+        <a href="{{ url_for('update', id=prediction[0]) }}" class="btn btn-update">Update</a>
+        <a href="{{ url_for('view', id=prediction[0]) }}" class="btn btn-view">View</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+    
+  </body>
+</html>
+
+<style>
+/* CSS styles for predict.history page */
+
+.invisible {
+    display: none;
+  }
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 100px; /* change the value as needed */
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type=text],
+input[type=date],
+select {
+  display: block;
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+button,
+#predictions-submit {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#predictions-section {
+  display: none;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
+button[type="submit"] {
+  display: inline-block;
+  margin-left: 10px; /* add some margin for spacing */
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-bar {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.form-control {
+  flex: 1;
+}
+
+.btn-primary {
+  margin-left: 10px;
+}
+
+.form-inline .form-control {
+  width: 70%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.btn-search {
+  display: inline-block;
+  vertical-align: middle; /* try changing this value to 'middle' or 'top' */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.9em;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.table thead tr {
+  background-color: #4CAF50;
+  color: #ffffff;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.table tbody tr:last-of-type {
+  border-bottom: 2px solid #4CAF50;
+}
+
+.table tbody td a {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.table tbody td a.btn-danger {
+  color: #ffffff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.table tbody td a.btn-danger:hover {
+  color: #ffffff;
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.table tbody td a.btn-primary {
+  color: #ffffff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.table tbody td a.btn-primary:hover {
+  color: #ffffff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.btn-update, .btn-delete, .btn-view {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.btn-update {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.btn-delete {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.btn-view {
+  background-color: #53b954;
+  border-color: #53b954;
+}
+
+a {
+    display: inline-block;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+  }
+
+</style>
